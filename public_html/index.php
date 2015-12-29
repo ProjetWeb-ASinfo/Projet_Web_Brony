@@ -3,7 +3,6 @@
     <head>
         <title>Accueil</title>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -93,10 +92,11 @@
                                 {
                                     $user = $_SESSION['users'][$i];
                                     echo "<a href='#'>$user[identifiant]</a>";
+                                    echo '<a href="deconnexion.php">Déconnexion</a>';
                                 }
                                 else
                                 {
-                                    echo '<form method="POST">';
+                                    echo '<form action="#" method="POST">';
                                     echo '<input type="text" name="identifiant" value="Identifiant" /><br>';
                                     echo '<input type="password" name="mdp" /><br>';
                                     echo '<input type="submit" value="Connexion" />';
