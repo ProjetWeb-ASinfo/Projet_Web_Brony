@@ -42,7 +42,7 @@
                                     echo '<form action="connexion.php" method="POST">';
                                     echo 'Identifiant<br><input type="text" class="form-control" name="identifiant" />';
                                     echo 'Mot de passe<br><input type="password" class="form-control" name="mdp" />';
-                                    echo '<input type="submit" value="Connexion" /><a href="#">créer un compte</a>';
+                                    echo '<input type="submit" value="Connexion" /><a href="ajout_util.php">créer un compte</a>';
                                     echo '</form>';
                                 }
                             ?>

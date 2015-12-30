@@ -13,7 +13,7 @@
         <?php include 'navbar.php'; ?>
 
         <div class="container">    
-            <section id="mainDisplay" class="col-lg-8 col-sm-offset-2" >
+            <section class="col-lg-8 col-sm-offset-2 mainDisplay" >
                 <h3 class="text-center"> This actually might be a title </h3>
                 <div class="text-justify">
                     This is an interesting div. A very interesting div! Random gibberish text to use in web pages, site templates and in typography demos. Get rid of Lorem Ipsum forever. A tool for web designers who want to save time.

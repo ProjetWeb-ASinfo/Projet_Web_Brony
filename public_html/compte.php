@@ -23,13 +23,13 @@
                 margin-top: 50%;
             }
             
-            .nav-pills>li.active>a,.nav-pills>li.active>a:focus,.nav-pills>li.active>a:hover {
+            .nav-pills li.active a,.nav-pills li.active a:focus,.nav-pills li.active a:hover {
                 background-color: rgb(170, 51, 255);
                 color: #fff;
             }
             
-            .nav-pills>li>a { color: #ffccff; }
-            .nav-pills>li>a:hover {
+            .nav-pills li a { color: #ffccff; }
+            .nav-pills li a:hover {
                 background-color: rgba(170, 51, 255, 0.5);
                 color: #fff;
             }
@@ -88,7 +88,7 @@
                         ?>
                     </p>
                     <p>
-                        <span class="T2">Identifiant </span>
+                        <span class="T2">Nom d'utilisateur: </span>
                         <?php
                         echo "$user[identifiant]";
                         ?>
