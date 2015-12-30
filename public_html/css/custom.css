@@ -1,0 +1,51 @@
+
+body
+{
+    background-image: url("background.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+    font-family: fantasy;
+}
+.menu
+{
+    background: linear-gradient(to bottom, rgba(240, 51, 240, 0.8), rgba(240, 51, 240, 0.3));
+    border: none;
+}             
+#mainDisplay {
+    background-color: rgba(255, 51, 255,.6);
+    margin-top: 5%;
+}
+.menu-button
+{
+    color : rgb(255, 180, 255);
+    background-color: rgb(235, 21, 235);
+    border-color: rgb(200, 0, 200);
+    font-size: 150%;
+}
+.menu-button:hover, menu-button:focus
+{
+    color : rgb(235, 21, 235);
+    background-color: rgb(255, 180, 255);
+}
+.dropdown
+{
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content
+{
+    display: none;
+    position: absolute;
+    background-color: rgba(235, 21, 235, 0.9);
+    z-index: 1;
+}
+.dropdown-content a {
+    text-decoration: none;
+    color: rgb(255, 180, 255);
+    display: block;
+    padding: 10px 10px;
+    min-width: 100%;
+}
+.dropdown-content a:hover { background-color: rgb(235, 21, 235); }
+.dropdown:hover .dropdown-content { display: block; }

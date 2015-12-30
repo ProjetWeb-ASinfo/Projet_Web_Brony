@@ -1,6 +1,6 @@
 <?php
 include_once('base.php');
-$i = 0;
+$i = -1;
 foreach($_SESSION['users'] as $user)
 {
     $i++;
