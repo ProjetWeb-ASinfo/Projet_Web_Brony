@@ -1,14 +1,12 @@
 
-body
-{
+body {
     background-image: url("background.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: 100%;
+    background-size: cover;
     font-family: fantasy;
 }
-.menu
-{
+.menu {
     background: linear-gradient(to bottom, rgba(240, 51, 240, 0.8), rgba(240, 51, 240, 0.3));
     border: none;
 }             
@@ -16,25 +14,21 @@ body
     background-color: rgba(255, 51, 255,.6);
     margin-top: 5%;
 }
-.menu-button
-{
+.menu-button {
     color : rgb(255, 180, 255);
     background-color: rgb(235, 21, 235);
     border-color: rgb(200, 0, 200);
-    font-size: 150%;
+    font-size: 130%;
 }
-.menu-button:hover, menu-button:focus
-{
+.menu-button:hover, menu-button:focus {
     color : rgb(235, 21, 235);
     background-color: rgb(255, 180, 255);
 }
-.dropdown
-{
+.dropdown {
     position: relative;
     display: inline-block;
 }
-.dropdown-content
-{
+.dropdown-content {
     display: none;
     position: absolute;
     background-color: rgba(235, 21, 235, 0.9);
@@ -46,6 +40,13 @@ body
     display: block;
     padding: 10px 10px;
     min-width: 100%;
+    white-space: nowrap;
 }
-.dropdown-content a:hover { background-color: rgb(235, 21, 235); }
+.dropdown-content a:hover { background-color: rgb(204, 0, 204); }
 .dropdown:hover .dropdown-content { display: block; }
+
+.form-control {
+    background-color: rgba(204, 0, 204, 0.4);
+    border: 1px solid rgb(255, 180, 255);
+    color: rgb(255, 180, 255);
+}

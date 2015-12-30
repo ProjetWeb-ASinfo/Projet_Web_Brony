@@ -10,4 +10,5 @@ foreach($_SESSION['users'] as $user)
         header('location:/projet_S1/public_html');
     }
 }
+header('location:/projet_S1/public_html');
 ?>
