@@ -7,9 +7,10 @@
                     <div class="col-sm-1">
                         <a class="btn menu-button">Achats</a>
                         <div class="dropdown-content">
-                            <a href="#">Little Poneys</a>
+                            <a href="#">Poneys</a>
                             <a href="#">Licornes</a>
-                            <a href="#">Others…</a>
+                            <a href="#">Pégases</a>
+                            <a href="#">Alicornes</a>
                         </div>
                     </div>
                 </li>
@@ -29,11 +30,12 @@
                         <a class="btn menu-button">Mon Compte</a>
                         <div class="dropdown-content">
                             <?php
-                                include_once('base.php');
-                                $i = $_SESSION['index'];
+                                include_once('session.php');
+                                $i = $_SESSION['users']['id'];
+                                echo $i;
                                 if ($i<>-1)
                                 {
-                                    $user = $_SESSION['users'][$i];
+                                    $user = $_SESSION['users'];
                                     echo "<a href='compte.php'><span class='glyphicon glyphicon-user'></span>    $user[identifiant]</a>";
                                     echo '<a href="deconnexion.php"><span class="glyphicon glyphicon-log-in"></span>    Déconnexion</a>';
                                 }
