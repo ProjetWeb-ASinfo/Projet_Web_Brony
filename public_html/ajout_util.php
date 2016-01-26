@@ -7,13 +7,22 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            
+            function validation()
+            {
+        alert('test');        
+        document.body.repeter.value='test';
+            }
+            
+        </script>
         
         <link rel="stylesheet" type="text/css" href="css/custom.css">
         <style type="text/css">
             .T2 {
                 font-size: 15pt;
                 font-family: Arial;
-                color: #ffccff;
+                color: #ff33ff;
             }
             
             h1 {
@@ -31,7 +40,7 @@
             }
             
             .panel-body {
-                background-color: rgba(255, 51, 255, .7);
+                background-color: rgba(255, 204, 255, .7);
             }
         </style>
     </head>
@@ -52,9 +61,9 @@
                         <br>
                         <span class="T2">Mot de passe: </span><input type="password" class="form-control" name="mdp" />
                         <br>
-                        <span class="T2">Répétez le mot de passe: </span><input type="password" class="form-control" name="nom" />
+                        <span class="T2">Répétez le mot de passe: <input type="password" class="form-control" onclick="validation()" name="repeter" value="" /></span>
                         <br>
-                        <center><span class="T2"><input type="submit" value="Valider" /></span></center>
+                        <center><button type="submit" class="btn btn-default"><span class="T2">Valider</span></button></center>
                     </form>
                 </div>
             </div>
