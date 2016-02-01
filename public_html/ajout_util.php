@@ -7,15 +7,6 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        <script type="text/javascript">
-            
-            function validation()
-            {
-        alert('test');        
-        document.body.repeter.value='test';
-            }
-            
-        </script>
         
         <link rel="stylesheet" type="text/css" href="css/custom.css">
         <style type="text/css">
@@ -57,11 +48,11 @@
                         <br>
                         <span class="T2">Prénom: </span><input type="text" class="form-control" name="prenom" />
                         <br>
-                        <span class="T2">Nom d'utilisateur: </span><input type="text" class="form-control" name="identifiant" />
+                        <span class="T2">Nom d'utilisateur: </span><input type="text" class="form-control" name="login" />
                         <br>
-                        <span class="T2">Mot de passe: </span><input type="password" class="form-control" name="mdp" />
+                        <span class="T2">Mot de passe: </span><input type="password" class="form-control" name="password" />
                         <br>
-                        <span class="T2">Répétez le mot de passe: <input type="password" class="form-control" onclick="validation()" name="repeter" value="" /></span>
+                        <span class="T2">Répétez le mot de passe: </span><input type="password" class="form-control" name="repeter" value="" />
                         <br>
                         <center><button type="submit" class="btn btn-default"><span class="T2">Valider</span></button></center>
                     </form>

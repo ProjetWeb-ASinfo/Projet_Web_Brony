@@ -32,11 +32,10 @@
                             <?php
                                 include_once('session.php');
                                 $i = $_SESSION['users']['id'];
-                                echo $i;
                                 if ($i<>-1)
                                 {
                                     $user = $_SESSION['users'];
-                                    echo "<a href='compte.php'><span class='glyphicon glyphicon-user'></span>    $user[identifiant]</a>";
+                                    echo "<a href='compte.php'><span class='glyphicon glyphicon-user'></span>    $user[login]</a>";
                                     echo '<a href="deconnexion.php"><span class="glyphicon glyphicon-log-in"></span>    Déconnexion</a>';
                                 }
                                 else

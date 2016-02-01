@@ -1,5 +1,9 @@
 <?php
-include_once 'base.php';
-$_SESSION['users']['id'] = -1;
+include_once 'session.php';
+$_SESSION['users'] = array('id' => '-1',
+                               'nom' => '',
+                               'prenom' => '',
+                               'login' => '',
+                               'password' => '');
 header('location:/projet_S1/public_html');
 ?>

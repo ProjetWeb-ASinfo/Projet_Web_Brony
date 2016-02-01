@@ -36,12 +36,12 @@
             
             .tab-content {
                 display: block;
-                background-color: #e48300;
-                color: #ffff99;
+                background-color: rgba(143, 92, 245, 0.9);
+                color: #feeafe;
                 margin-top: 5%;
                 border-style: solid;
                 border-width: 5pt;
-                border-color: #ffff99;
+                border-color: #ffccff;
             }
             
             .T2 {
@@ -76,8 +76,8 @@
                         <img src="user.png" alt="Image de profil" /><br><br>
                         <span class="T2">Nom: </span>
                         <?php
-                        include_once 'base.php';
-                        $user = $_SESSION['users'][$_SESSION['index']];
+                        include_once 'session.php';
+                        $user = $_SESSION['users'];
                         echo "$user[nom]";
                         ?>
                     </p>
@@ -90,7 +90,7 @@
                     <p>
                         <span class="T2">Nom d'utilisateur: </span>
                         <?php
-                        echo "$user[identifiant]";
+                        echo "$user[login]";
                         ?>
                     </p>
                 </div>
@@ -121,23 +121,20 @@
                     </p>
                 </div>
                 <div id="ajouter" class="tab-pane fade">
-                    <h1>Ajouter</h1>
-                    <p>
-                    This is another interesting div!
-                    I, too, sing America.
-                    I am the darker brother.
-                    They send me to eat in the kitchen
-                    When company comes,
-                    But I laugh,
-                    And eat well,
-                    And grow strong.
-
-
-                    Then.
-                    Besides,
-                    They'll see how beautiful I am
-                    And be ashamed--
-                    </p>
+                    <h1>Nouveau compte:</h1>
+                    <form action="nouveau.php" method="post">
+                        <span class="T2">Nom: </span><input type="text" class="form-control" name="nom" />
+                        <br>
+                        <span class="T2">Prénom: </span><input type="text" class="form-control" name="prenom" />
+                        <br>
+                        <span class="T2">Nom d'utilisateur: </span><input type="text" class="form-control" name="login" />
+                        <br>
+                        <span class="T2">Mot de passe: </span><input type="password" class="form-control" name="password" />
+                        <br>
+                        <span class="T2">Répétez le mot de passe: </span><input type="password" class="form-control" name="repeter" value="" />
+                        <br>
+                        <center><button type="submit" class="btn btn-default"><span class="T2">Valider</span></button></center>
+                    </form>
                 </div>
                 <div id="supprimer" class="tab-pane fade">
                     <h1>Supprimer</h1>
