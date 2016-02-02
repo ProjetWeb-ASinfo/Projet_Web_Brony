@@ -121,7 +121,7 @@
                     </p>
                 </div>
                 <div id="ajouter" class="tab-pane fade">
-                    <h1>Nouveau compte:</h1>
+                    <h1>Nouveau compte</h1>
                     <form action="nouveau.php" method="post">
                         <span class="T2">Nom: </span><input type="text" class="form-control" name="nom" />
                         <br>
@@ -137,38 +137,11 @@
                     </form>
                 </div>
                 <div id="supprimer" class="tab-pane fade">
-                    <h1>Supprimer</h1>
-                    <p>
-                    This is another interesting div!
-                    I, too, sing America.
-                    I am the darker brother.
-                    They send me to eat in the kitchen
-                    When company comes,
-                    But I laugh,
-                    And eat well,
-                    And grow strong.
-
-                    Tomorrow,
-                    I'll be at the table
-                    When company comes.
-                    Nobody'll dare
-                    Say to me,
-                    "Eat in the kitchen,"
-                    Then.
-                    Besides,
-                    They'll see how beautiful I am
-                    And be ashamed--
-                    Tomorrow,
-                    I'll be at the table
-                    When company comes.
-                    Nobody'll dare
-                    Say to me,
-                    "Eat in the kitchen,"
-                    Then.
-                    Besides,
-                    They'll see how beautiful I am
-                    And be ashamed--
-                    </p>
+                    <h1>Supprimer un compte</h1>
+                    <form action="supprime.php" method="post">
+                        <span class="T2">Login de l'utilisateur: </span><input type="text" class="form-control" name="login" />
+                        <center><button type="submit" class="btn btn-default"><span class="T2">Valider</span></button></center>
+                    </form>
                 </div>
                 <div id="messages" class="tab-pane fade">
                     <h1>Messages</h1>

@@ -43,7 +43,7 @@
                                     echo '<form action="connexion.php" method="POST">';
                                     echo 'Identifiant<br><input type="text" class="form-control" name="identifiant" />';
                                     echo 'Mot de passe<br><input type="password" class="form-control" name="mdp" />';
-                                    echo '<button type="submit" class="btn btn-default">Connexion</button><a href="ajout_util.php">créer un compte</a>';
+                                    echo '<button type="submit" class="btn btn-default" style="min-width: 100%">Connexion</button><a href="ajout_util.php">créer un compte</a>';
                                     echo '</form>';
                                 }
                             ?>

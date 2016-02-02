@@ -2,7 +2,7 @@
 include_once('session.php');
 
 $db = new pdo('mysql:host=localhost;dbname=projet_s1', 'root', 'password');
-$login = "select * from utilisateurs where login = \"$_POST[identifiant]\" and password = \"$_POST[mdp]\"";
+$login = "select * from utilisateurs where login = '$_POST[identifiant]' and password = '$_POST[mdp]'";
 $request = $db->prepare($login);
 $request->execute();
 $session = $_SESSION['users'];
