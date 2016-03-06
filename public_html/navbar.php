@@ -35,7 +35,12 @@
                                 if ($_SESSION['users']['login']!='')
                                 {
                                     $user = $_SESSION['users'];
-                                    echo "<a href='compte.php'><span class='glyphicon glyphicon-user'></span>    $user[login]</a>";
+                                    if ($user['id']=='Quantum')
+                                        echo "<a href='administrateur.php'>";
+                                    else                                       
+                                        echo "<a href='utilisateur.php'>";
+                                    
+                                    echo "<span class='glyphicon glyphicon-user'></span>    $user[login]</a>";
                                     echo '<a href="index.php?deco=true"><span class="glyphicon glyphicon-log-in"></span>    Déconnexion</a>';
                                 }
                                 else
