@@ -31,20 +31,23 @@
                         <div class="dropdown-content">
                             <?php
                                 include_once('session.php');
-                                $i = $_SESSION['users']['id'];
-                                if ($i<>-1)
+                                
+                                if ($_SESSION['users']['login']!='')
                                 {
                                     $user = $_SESSION['users'];
                                     echo "<a href='compte.php'><span class='glyphicon glyphicon-user'></span>    $user[login]</a>";
-                                    echo '<a href="deconnexion.php"><span class="glyphicon glyphicon-log-in"></span>    Déconnexion</a>';
+                                    echo '<a href="index.php?deco=true"><span class="glyphicon glyphicon-log-in"></span>    Déconnexion</a>';
                                 }
                                 else
                                 {
-                                    echo '<form action="connexion.php" method="POST">';
-                                    echo 'Identifiant<br><input type="text" class="form-control" name="identifiant" />';
-                                    echo 'Mot de passe<br><input type="password" class="form-control" name="mdp" />';
-                                    echo '<button type="submit" class="btn btn-default" style="min-width: 100%">Connexion</button><a href="ajout_util.php">créer un compte</a>';
-                                    echo '</form>';
+                                    echo '<form action="index.php" method="POST">
+                                            Identifiant
+                                            <br><input type="text" class="form-control" name="identifiant" />
+                                            Mot de passe
+                                            <br><input type="password" class="form-control" name="mdp" />
+                                            <button type="submit" class="btn btn-default" style="min-width: 100%">Connexion</button>
+                                          </form>
+                                          <a href="ajout_util.php">créer un compte</a>';
                                 }
                             ?>
                         </div>

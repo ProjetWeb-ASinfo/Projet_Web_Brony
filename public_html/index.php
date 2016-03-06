@@ -10,9 +10,30 @@
         <link rel="stylesheet" type="text/css" href="css/custom.css">
     </head>
     <body>
-        <?php include 'navbar.php'; ?>
+        <?php
+        include_once('session.php');
+            if ($_SERVER['REQUEST_METHOD']=='POST') {
+                $db = new pdo('mysql:host=localhost;dbname=projet_s1', 'root', 'password');
+                $login = "select * from utilisateurs where login = '$_POST[identifiant]' and password = '$_POST[mdp]'";
+                $request = $db->prepare($login);
+                $request->execute();
 
-        <div class="container">    
+                if ($utilisateur = $request->fetch(PDO::FETCH_ASSOC)) {
+                    foreach ($utilisateur as $i => $champ) { $_SESSION['users'][$i] = $utilisateur[$i]; }
+                } else
+                    echo '<div class="alert alert-danger" style="margin-top: 4%; text-align: center">
+                            <strong>Erreur!</strong> Mauvais identifiant ou mot de passe.
+                          </div>';
+            } elseif (isset ($_GET['deco'])) {
+                $_SESSION['users'] = array('id' => '-1',
+                                   'nom' => '',
+                                   'prenom' => '',
+                                   'login' => '',
+                                   'password' => '');
+            }
+        include 'navbar.php';
+        ?>
+        <div class="container">
             <section class="col-lg-8 col-sm-offset-2 mainDisplay" >
                 <h3 class="text-center"> This actually might be a title </h3>
                 <div class="text-justify">

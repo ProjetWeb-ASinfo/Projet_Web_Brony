@@ -122,7 +122,7 @@
                 </div>
                 <div id="ajouter" class="tab-pane fade">
                     <h1>Nouveau compte</h1>
-                    <form action="nouveau.php" method="post">
+                    <form action="gestion_util.php" method="post">
                         <span class="T2">Nom: </span><input type="text" class="form-control" name="nom" />
                         <br>
                         <span class="T2">Prénom: </span><input type="text" class="form-control" name="prenom" />
@@ -138,7 +138,7 @@
                 </div>
                 <div id="supprimer" class="tab-pane fade">
                     <h1>Supprimer un compte</h1>
-                    <form action="supprime.php" method="post">
+                    <form action="gestion_util.php" method="post">
                         <span class="T2">Login de l'utilisateur: </span><input type="text" class="form-control" name="login" />
                         <center><button type="submit" class="btn btn-default"><span class="T2">Valider</span></button></center>
                     </form>

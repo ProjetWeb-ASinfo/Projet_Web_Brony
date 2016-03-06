@@ -43,18 +43,40 @@
                 <div class="panel-heading"><h1>Nouveau compte:</h1></div>
                 <div class="panel-body">
                     <br>
-                    <form action="nouveau.php" method="post">
+                    <script>
+                        function valider() {
+                            var pwd1 = document.getElementByID('pwd1');
+                            var pwd2 = document.getElementByID('pwd2');
+                            if (pwd1.value!=pwd2.value) {
+                                warning("Les mots de passe ne correspondent pas");
+                                return false;
+                            }
+                            if (document.getElementsByName('nom').value == '') {
+                                warning("Vous devez entrer un nom!");
+                                return false;
+                            }
+                            if (document.getElementsByName('prenom').value=='') {
+                                warning("Vous devez entrer un prénom!");
+                                return false;
+                            }
+                            if (document.getElementsByName('login').value=='') {
+                                warning("Vous devez entrer un login!");
+                                return false;
+                            }
+                        }
+                    </script>
+                    <form action="#" method="post" id="form" onsubmit="valider()">
                         <span class="T2">Nom: </span><input type="text" class="form-control" name="nom" />
                         <br>
                         <span class="T2">Prénom: </span><input type="text" class="form-control" name="prenom" />
                         <br>
                         <span class="T2">Nom d'utilisateur: </span><input type="text" class="form-control" name="login" />
                         <br>
-                        <span class="T2">Mot de passe: </span><input type="password" class="form-control" name="password" />
+                        <span class="T2">Mot de passe: </span><input type="password" id="pwd1" class="form-control" name="password" />
                         <br>
-                        <span class="T2">Répétez le mot de passe: </span><input type="password" class="form-control" name="repeter" value="" />
+                        <span class="T2">Répétez le mot de passe: </span><input type="password" id="pwd2" class="form-control" name="repeter" value="" />
                         <br>
-                        <center><button type="submit" class="btn btn-default"><span class="T2">Valider</span></button></center>
+                        <button type="submit" class="btn btn-default btn-block"><span class="T2">Valider</span></button>
                     </form>
                 </div>
             </div>

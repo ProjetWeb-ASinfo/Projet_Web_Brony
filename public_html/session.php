@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['users'])) {
-    $_SESSION['users'] = array('id' => '-1',
+    $_SESSION['users'] = array('id' => '',
                                'nom' => '',
                                'prenom' => '',
                                'login' => '',
