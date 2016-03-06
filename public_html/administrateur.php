@@ -53,6 +53,13 @@
                 text-align: center;
             }
             
+            #resultat {
+                border: 1px solid rgb(255, 180, 255);
+                border-radius: 15px;
+                width: 100%;
+                height: 0px;
+            }
+            
         </style>
         
     </head>
@@ -96,29 +103,17 @@
                 </div>
                 <div id="chercher" class="tab-pane fade">
                     <h1>Chercher</h1>
-                    <p>
-                    This is another interesting div!
-                    I, too, sing America.
-                    I am the darker brother.
-                    They send me to eat in the kitchen
-                    When company comes,
-                    But I laugh,
-                    And eat well,
-                    And grow strong.
-                    am the darker brother.
-                    They send me to eat in the kitchen
-                    When compan
-                    Tomorrow,
-                    I'll be at the table
-                    When company comes.
-                    Nobody'll dare
-                    Say to me,
-                    "Eat in the kitchen,"
-                    Then.
-                    Besides,
-                    They'll see how beautiful I am
-                    And be ashamed--
-                    </p>
+                    <form action="recherche.php" method="get" target="frame" onsubmit="document.getElementById('resultat').style='height: 100%'">
+                        <span class="T2">Nom: </span><input type="text" class="form-control" name="nom" />
+                        <br>
+                        <span class="T2">Prénom: </span><input type="text" class="form-control" name="prenom" />
+                        <br>
+                        <span class="T2">Nom d'utilisateur: </span><input type="text" class="form-control" name="login" />
+                        <br>
+                        <center><button type="submit" class="btn btn-default"><span class="T2">Rechercher</span></button></center>
+                    </form>
+                    <br>
+                    <iframe src="" name="frame" id="resultat" allowtransparency="true"></iframe>
                 </div>
                 <div id="ajouter" class="tab-pane fade">
                     <h1>Nouveau compte</h1>

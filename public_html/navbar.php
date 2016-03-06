@@ -2,7 +2,11 @@
     <div class="container-fluid">
         <div class="col-sm-offset-2">
             <ul class="nav navbar-nav">
-                <li><div class="col-sm-1"><a class="btn menu-button" href="/projet_S1/public_html">Accueil</a></div></li>
+                <li>
+                    <div class="col-sm-1">
+                        <a class="btn menu-button" href="/projet_S1/public_html">Accueil</a>
+                    </div>
+                </li>
                 <li class="dropdown">
                     <div class="col-sm-1">
                         <a class="btn menu-button">Achats</a>
@@ -35,7 +39,7 @@
                                 if ($_SESSION['users']['login']!='')
                                 {
                                     $user = $_SESSION['users'];
-                                    if ($user['id']=='Quantum')
+                                    if ($user['login']=='Quantum')
                                         echo "<a href='administrateur.php'>";
                                     else                                       
                                         echo "<a href='utilisateur.php'>";
