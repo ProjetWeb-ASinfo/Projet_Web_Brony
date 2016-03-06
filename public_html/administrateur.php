@@ -11,6 +11,14 @@
         <link rel="stylesheet" type="text/css" href="css/custom.css">
         <style type="text/css">
             
+            .body, .modal-open {
+                background-image: url("css/background.png");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                font-family: fantasy;
+            }
+            
             #menu_compte {
                 background-color: rgba(153, 102, 255, 0.8);
                 display: block;
@@ -23,13 +31,15 @@
                 margin-top: 50%;
             }
             
-            .nav-pills li.active a,.nav-pills li.active a:focus,.nav-pills li.active a:hover {
+            .nav-pills > li.active > a,
+            .nav-pills > li.active > a:focus,
+            .nav-pills > li.active > a:hover {
                 background-color: rgb(170, 51, 255);
                 color: #fff;
             }
             
-            .nav-pills li a { color: #ffccff; }
-            .nav-pills li a:hover {
+            .nav-pills > li > a { color: #ffccff; }
+            .nav-pills > li > a:hover {
                 background-color: rgba(170, 51, 255, 0.5);
                 color: #fff;
             }
@@ -60,10 +70,16 @@
                 height: 0px;
             }
             
+            table a {
+                text-decoration: none;
+                color: white;
+            }
+            table a:hover { color: #feeafe; }
+            
         </style>
         
     </head>
-    <body>
+    <body class="body">
         <?php include 'navbar.php'; ?>
 
         <div class="container">
@@ -140,27 +156,34 @@
                 </div>
                 <div id="messages" class="tab-pane fade">
                     <h1>Messages</h1>
-                    <p>
-                    This is another interesting div!
-                    I, too, sing America.
-                    I am the darker brother.
-                    They send me to eat in the kitchen
-                    When company comes,
-                    But I laugh,
-                    And eat well,
-                    And grow strong.
-
-                    Tomorrow,
-                    I'll be at the table
-                    When company comes.
-                    Nobody'll dare
-                    Say to me,
-                    "Eat in the kitchen,"
-                    Then.
-                    Besides,
-                    They'll see how beautiful I am
-                    And be ashamed--
-                    </p>
+                    <table class="table">
+                        <thead style="font-size: 13pt">
+                            <tr><td>Expéditeur</td><td>Objet</td></tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $login = $_SESSION['users']['login'];
+                                $db = new pdo('mysql:host=localhost;dbname=projet_s1', 'root', 'password');
+                                $messages = "SELECT id, expediteur, objet FROM messages WHERE destinataire='$login' AND status=0";
+                                $request = $db->prepare($messages);
+                                $request->execute();
+                                
+                                while ($result = $request->fetch(PDO::FETCH_ASSOC))
+                                    echo "<tr><td>$result[expediteur]</td><td><a href='message.php?id=$result[id]' target='msg_frame' data-toggle='modal' data-target='#msg_modal'>$result[objet]</a></td>";
+                                
+                            ?>
+                        </tbody>
+                    </table>
+                    <div class="modal fade" id="msg_modal">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content" style="background-color: rgb(255, 230, 255);">
+                                <iframe src="" name="msg_frame" allowtransparency="true" style="width: 100%; border: none;" onload="this.style.height=this.contentDocument.body.scrollHeight +'px';"></iframe>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
