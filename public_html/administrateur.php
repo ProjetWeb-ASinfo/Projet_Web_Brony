@@ -113,7 +113,7 @@
                         <center><button type="submit" class="btn btn-default"><span class="T2">Rechercher</span></button></center>
                     </form>
                     <br>
-                    <iframe src="" name="frame" id="resultat" allowtransparency="true"></iframe>
+                    <iframe src="" name="frame" id="resultat" allowtransparency="true" scrolling="no" onload="this.style.height=this.contentDocument.body.scrollHeight +'px';"></iframe>
                 </div>
                 <div id="ajouter" class="tab-pane fade">
                     <h1>Nouveau compte</h1>

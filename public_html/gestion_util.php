@@ -1,4 +1,5 @@
 <?php
+    include_once 'session.php';
     $db = new pdo('mysql:host=localhost;dbname=projet_s1', 'root', 'password');
 
     if (isset($_POST['nom'])) {
@@ -20,5 +21,8 @@
             $request2->execute();
         }
     }
-    header('location:/projet_S1/public_html/compte.php');
+    if ($_SESSION['users']['login']=='Quantum')
+        header('location:/projet_S1/public_html/administrateur.php');
+    else
+        header('location:/projet_S1/public_html/utilisateur.php');
 ?>
