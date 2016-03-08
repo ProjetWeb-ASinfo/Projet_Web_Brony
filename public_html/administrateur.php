@@ -102,22 +102,18 @@
                         <img src="user.png" alt="Image de profil" /><br><br>
                         <span class="T2">Nom: </span>
                         <?php
-                        include_once 'session.php';
-                        $user = $_SESSION['users'];
-                        echo "$user[nom]";
+                            include_once 'session.php';
+                            $user = $_SESSION['users'];
+                            echo "$user[nom]";
                         ?>
                     </p>
                     <p>
                         <span class="T2">Prénom: </span>
-                        <?php
-                        echo "$user[prenom]";
-                        ?>
+                        <?php echo "$user[prenom]"; ?>
                     </p>
                     <p>
                         <span class="T2">Nom d'utilisateur: </span>
-                        <?php
-                        echo "$user[login]";
-                        ?>
+                        <?php echo "$user[login]"; ?>
                     </p>
                 </div>
                 <div id="chercher" class="tab-pane fade">
@@ -134,10 +130,9 @@
                     <br>
                     <iframe src="" name="frame" id="resultat" allowtransparency="true" scrolling="no"></iframe>
                     <script>
-                        forme = document.getElementById('recherche');
-                        forme.onsubmit=function (){
+                        $('#recherche').submit(function (){
                             document.getElementById('resultat').style="height: 100%";
-                        };
+                        });
 
                         res_frame = document.getElementById('resultat');
                         res_frame.onload=function (){
@@ -206,11 +201,11 @@
                     </div>
                     
                     <span class="T2">Écrire un message</span>
-                    <form action="administrateur.php" method="post">
+                    <form id="envoyer" action="administrateur.php" method="post">
                         <div class="panel panel-default form-group">
                             <div class="panel-heading" style="background-color: #661aff;">
-                                <input type="text" name="objet" value="Objet du message" class="form-control" />
-                                <input type="text" name="destinataire" value="Login du destinataire" class="form-control" />
+                                <input type="text" id="obj" name="objet" value="Objet du message" class="form-control" />
+                                <input type="text" id="dest" name="destinataire" value="Login du destinataire" class="form-control" />
                             </div>
                             <div class="panel-body" style="background-color: #661aff;">
                                 <label for="texte">Message</label>
@@ -218,6 +213,35 @@
                             </div>
                         </div>
                     </form>
+                    <script>
+                        objet = document.getElementById('obj');
+                        destinataire = document.getElementById('dest');
+                        
+                        objet.onfocus = function() {
+                            if (objet.value=='Objet du message')
+                                objet.value = '';
+                        };
+                        objet.onblur = function() {
+                            if (objet.value=='')
+                                objet.value = 'Objet du message';
+                        };
+                        
+                        destinataire.onfocus = function() {
+                            if (destinataire.value=='Login du destinataire')
+                                destinataire.value = '';
+                        };
+                        destinataire.onblur = function() {
+                            if (destinataire.value=='')
+                                destinataire.value = 'Login du destinataire';
+                        };
+                        
+                        $('#envoyer').submit(function() {
+                            if (destinataire.value=='' || objet.value=='') {
+                                alert('Vous devez entrer un login et un objet!');
+                                return false;
+                            }
+                        });
+                    </script>
                 </div>
             </div>
         </div>
