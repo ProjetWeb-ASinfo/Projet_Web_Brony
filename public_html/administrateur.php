@@ -76,8 +76,11 @@
             }
             table a:hover { color: #feeafe; }
             
+            .form-control {
+                 color: #800080;
+                 background-color: #ffe6ff;
+            }
         </style>
-        
     </head>
     <body class="body">
         <?php include 'navbar.php'; ?>
@@ -119,7 +122,7 @@
                 </div>
                 <div id="chercher" class="tab-pane fade">
                     <h1>Chercher</h1>
-                    <form action="recherche.php" method="get" target="frame" onsubmit="document.getElementById('resultat').style='height: 100%'">
+                    <form action="recherche.php" method="get" target="frame" id="recherche">
                         <span class="T2">Nom: </span><input type="text" class="form-control" name="nom" />
                         <br>
                         <span class="T2">Prénom: </span><input type="text" class="form-control" name="prenom" />
@@ -129,7 +132,18 @@
                         <center><button type="submit" class="btn btn-default"><span class="T2">Rechercher</span></button></center>
                     </form>
                     <br>
-                    <iframe src="" name="frame" id="resultat" allowtransparency="true" scrolling="no" onload="this.style.height=this.contentDocument.body.scrollHeight +'px';"></iframe>
+                    <iframe src="" name="frame" id="resultat" allowtransparency="true" scrolling="no"></iframe>
+                    <script>
+                        forme = document.getElementById('recherche');
+                        forme.onsubmit=function (){
+                            document.getElementById('resultat').style="height: 100%";
+                        };
+
+                        res_frame = document.getElementById('resultat');
+                        res_frame.onload=function (){
+                            frame.style.height=frame.contentDocument.body.scrollHeight +"px";
+                        };
+                    </script>
                 </div>
                 <div id="ajouter" class="tab-pane fade">
                     <h1>Nouveau compte</h1>
@@ -177,13 +191,33 @@
                     <div class="modal fade" id="msg_modal">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content" style="background-color: rgb(255, 230, 255);">
-                                <iframe src="" name="msg_frame" allowtransparency="true" style="width: 100%; border: none;" onload="this.style.height=this.contentDocument.body.scrollHeight +'px';"></iframe>
+                                <iframe src="" name="msg_frame" allowtransparency="true" style="width: 100%; border: none;"></iframe>
+                                <script>
+                                    msg_frame = document.getElementsByName('msg_frame');
+                                        msg_frame.onload = function(){
+                                        msg_frame.style.height = msg_frame.contentDocument.body.scrollHeight +'px';
+                                    };
+                                </script>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
+                    <span class="T2">Écrire un message</span>
+                    <form action="administrateur.php" method="post">
+                        <div class="panel panel-default form-group">
+                            <div class="panel-heading" style="background-color: #661aff;">
+                                <input type="text" name="objet" value="Objet du message" class="form-control" />
+                                <input type="text" name="destinataire" value="Login du destinataire" class="form-control" />
+                            </div>
+                            <div class="panel-body" style="background-color: #661aff;">
+                                <label for="texte">Message</label>
+                                <textarea id="texte" name="message" class="form-control" rows="10">Bonjour,</textarea>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
