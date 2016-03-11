@@ -34,7 +34,6 @@
                         <a class="btn menu-button">Mon Compte</a>
                         <div class="dropdown-content">
                             <?php
-                                include_once('session.php');
                                 
                                 if ($_SESSION['users']['login']!='')
                                 {

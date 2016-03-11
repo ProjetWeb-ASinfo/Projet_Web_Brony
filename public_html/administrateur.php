@@ -1,3 +1,4 @@
+<?php include_once('session.php'); if ($_SESSION['users']['login']=='') header('location:/projet_S1/public_html'); ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -173,6 +174,13 @@
                             <?php
                             $login = $_SESSION['users']['login'];
                                 $db = new pdo('mysql:host=localhost;dbname=projet_s1', 'root', 'password');
+                                
+                                if ($_SERVER['REQUEST_METHOD']=='POST') {
+                                    $envoi = "INSERT INTO messages (id, expediteur, destinataire, objet, message, status) "
+                                            ."VALUES (NULL, '$login', '$_POST[destinataire]', '$_POST[objet]', '$_POST[message]', 0)";
+                                    $request = $db->prepare($envoi);
+                                    $request->execute();
+                                }
                                 $messages = "SELECT id, expediteur, objet FROM messages WHERE destinataire='$login' AND status=0";
                                 $request = $db->prepare($messages);
                                 $request->execute();
@@ -211,6 +219,7 @@
                                 <label for="texte">Message</label>
                                 <textarea id="texte" name="message" class="form-control" rows="10">Bonjour,</textarea>
                             </div>
+                            <button type="submit" class="btn btn-block btn-default"><span class="T2">Envoyer</span></button>
                         </div>
                     </form>
                     <script>

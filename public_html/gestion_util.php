@@ -1,9 +1,11 @@
 <?php
     include_once 'session.php';
+    if ($_SESSION['users']['login']=='') header('location:/projet_S1/public_html');
     $db = new pdo('mysql:host=localhost;dbname=projet_s1', 'root', 'password');
 
     if (isset($_POST['nom'])) {
-        $ajout = "INSERT INTO utilisateurs (id, nom, prenom, login, password) VALUES (NULL, '$_POST[nom]', '$_POST[prenom]', '$_POST[login]', '$_POST[password]')";
+        $ajout = "INSERT INTO utilisateurs (id, nom, prenom, login, password) "
+                ."VALUES (NULL, '$_POST[nom]', '$_POST[prenom]', '$_POST[login]', '$_POST[password]')";
         $request = $db->prepare($ajout);
         $request->execute();
         
