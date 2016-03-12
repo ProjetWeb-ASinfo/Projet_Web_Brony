@@ -63,7 +63,7 @@
                 <ul class="panel-body nav nav-pills nav-stacked">
                     <li class="active"><a data-toggle="pill" href="#profil">Profil</a></li>
                     <li><a data-toggle="pill" href="#achats">Mes achats</a></li>
-                    <li><a data-toggle="pill" href="#ventes">Mes vente</a></li>
+                    <li><a data-toggle="pill" href="#ventes">Mes ventes</a></li>
                     <li><a data-toggle="pill" href="#ajouter">Ajouter/supprimer</a></li>
                     <li><a data-toggle="pill" href="#messages">Mes messages</a></li>
                 </ul>
@@ -157,6 +157,32 @@
                         </thead>
                         <tbody>
                             <?php
+                                if ($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['id'])) {
+                                    
+                                    $test1 = "SELECT id FROM utilisateurs WHERE login='$_POST[nouveau]'";
+                                    $request1 = $db->prepare($test1);
+                                    $request1->execute();
+                                    
+                                    $test2 = "SELECT * FROM ventes WHERE id='$_POST[id]'";
+                                    $request2 = $db->prepare($test2);
+                                    $request2->execute();
+                                    $poney = $request2->fetch(PDO::FETCH_ASSOC);
+                                    
+                                    if (($res1=$request1->fetch(PDO::FETCH_ASSOC)) && $poney['proprietaire']==$login) {
+                                        $vente = "UPDATE ventes SET nouveau_proprietaire='$_POST[nouveau]', prix='$_POST[prix]' WHERE id='$_POST[id]'";
+                                        $request1 = $db->prepare($vente);
+                                        $request1->execute();
+                                        
+                                        $achat = "INSERT INTO achats (id, type, nom, prix, proprietaire, ancien_proprietaire) "
+                                                . "VALUES (NULL, '$poney[type]', '$poney[nom]', $_POST[prix], '$_POST[nouveau]', '$login')";
+                                        $request2 = $db->prepare($achat);
+                                        $request2->execute();
+                                    } else {
+                                        echo "<div class='alert alert-danger' style='margin-top: 4%; text-align: center'>"
+                                        . "<strong>Erreur!</strong> L'utilisateur $_POST[nouveau] n'existe pas ou le poney ne vous appartient pas.</div>";
+                                    }
+                                }
+                            
                                 $vente = "SELECT id, type, nom, nouveau_proprietaire, prix FROM ventes WHERE proprietaire='$login'";
                                 $request2 = $db->prepare($vente);
                                 $request2->execute();
@@ -166,11 +192,11 @@
                                        . "<td>$ligne[type]</td>"
                                        . "<td>$ligne[nom]</td>"
                                        . "<td>$ligne[nouveau_proprietaire]</td>"
-                                       . "<td name=$ligne[id]>$ligne[prix]</td>";
+                                       . "<td name=$ligne[id]>$ligne[prix]</td><td>";
                                     
                                     if ($ligne['nouveau_proprietaire']=='')
-                                        echo "<td><button id='$ligne[id]' name='vendre' class='btn btn-block btn-default' data-toggle='modal' data-target='#vente_modal'>Vendre</button></td>";
-                                    echo '</tr>';
+                                        echo "<button id='$ligne[id]' name='vendre' class='btn btn-block btn-default' data-toggle='modal' data-target='#vente_modal'>Vendre</button>";
+                                    echo '</td></tr>';
                                 }
                             ?>
                         </tbody>
