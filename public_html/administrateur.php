@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Accueil</title>
+        <title>Compte</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/bootstrap.min.css">        
@@ -103,7 +103,6 @@
                         <img src="user.png" alt="Image de profil" /><br><br>
                         <span class="T2">Nom: </span>
                         <?php
-                            include_once 'session.php';
                             $user = $_SESSION['users'];
                             echo "$user[nom]";
                         ?>
@@ -117,6 +116,7 @@
                         <?php echo "$user[login]"; ?>
                     </p>
                 </div>
+                
                 <div id="chercher" class="tab-pane fade">
                     <h1>Chercher</h1>
                     <form action="recherche.php" method="get" target="frame" id="recherche">
@@ -131,16 +131,13 @@
                     <br>
                     <iframe src="" name="frame" id="resultat" allowtransparency="true" scrolling="no"></iframe>
                     <script>
-                        $('#recherche').submit(function (){
-                            document.getElementById('resultat').style="height: 100%";
-                        });
-
                         res_frame = document.getElementById('resultat');
-                        res_frame.onload=function (){
-                            frame.style.height=frame.contentDocument.body.scrollHeight +"px";
+                        res_frame.onload = function (){
+                            res_frame.style.height=res_frame.contentDocument.body.scrollHeight -20 +"px";
                         };
                     </script>
                 </div>
+                
                 <div id="ajouter" class="tab-pane fade">
                     <h1>Nouveau compte</h1>
                     <form action="gestion_util.php" method="post">
@@ -157,6 +154,7 @@
                         <center><button type="submit" class="btn btn-default"><span class="T2">Valider</span></button></center>
                     </form>
                 </div>
+                
                 <div id="supprimer" class="tab-pane fade">
                     <h1>Supprimer un compte</h1>
                     <form action="gestion_util.php" method="post">
@@ -164,6 +162,7 @@
                         <center><button type="submit" class="btn btn-default"><span class="T2">Valider</span></button></center>
                     </form>
                 </div>
+                
                 <div id="messages" class="tab-pane fade">
                     <h1>Messages</h1>
                     <table class="table">
