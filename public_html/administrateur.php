@@ -20,25 +20,15 @@
                 font-family: fantasy;
             }
             
-            #menu_compte {
-                background-color: rgba(153, 102, 255, 0.8);
-                display: block;
-                position: fixed;
-                height: 100%;
-                margin-top: 4%;
-            }
-            
             .nav-pills {
                 margin-top: 50%;
             }
-            
             .nav-pills > li.active > a,
             .nav-pills > li.active > a:focus,
             .nav-pills > li.active > a:hover {
                 background-color: rgb(170, 51, 255);
                 color: #fff;
             }
-            
             .nav-pills > li > a { color: #ffccff; }
             .nav-pills > li > a:hover {
                 background-color: rgba(170, 51, 255, 0.5);
@@ -53,22 +43,6 @@
                 border-style: solid;
                 border-width: 5pt;
                 border-color: #ffccff;
-            }
-            
-            .T2 {
-                font-size: 15pt;
-                font-family: Arial;
-            }
-            
-            h1 {
-                text-align: center;
-            }
-            
-            #resultat {
-                border: 1px solid rgb(255, 180, 255);
-                border-radius: 15px;
-                width: 100%;
-                height: 0px;
             }
             
             table a {
@@ -101,32 +75,29 @@
                     <h1>Profil</h1>
                     <p>
                         <img src="user.png" alt="Image de profil" /><br><br>
-                        <span class="T2">Nom: </span>
+                        <h2>Nom: </h2>
                         <?php
                             $user = $_SESSION['users'];
                             echo "$user[nom]";
                         ?>
-                    </p>
                     <p>
-                        <span class="T2">Prénom: </span>
+                        <h2>Prénom: </h2>
                         <?php echo "$user[prenom]"; ?>
-                    </p>
                     <p>
-                        <span class="T2">Nom d'utilisateur: </span>
+                        <h2>Nom d'utilisateur: </h2>
                         <?php echo "$user[login]"; ?>
-                    </p>
                 </div>
                 
                 <div id="chercher" class="tab-pane fade">
                     <h1>Chercher</h1>
                     <form action="recherche.php" method="get" target="frame" id="recherche">
-                        <span class="T2">Nom: </span><input type="text" class="form-control" name="nom" />
+                        <h2>Nom: </h2><input type="text" class="form-control" name="nom" />
                         <br>
-                        <span class="T2">Prénom: </span><input type="text" class="form-control" name="prenom" />
+                        <h2>Prénom: </h2><input type="text" class="form-control" name="prenom" />
                         <br>
-                        <span class="T2">Nom d'utilisateur: </span><input type="text" class="form-control" name="login" />
+                        <h2>Nom d'utilisateur: </h2><input type="text" class="form-control" name="login" />
                         <br>
-                        <center><button type="submit" class="btn btn-default"><span class="T2">Rechercher</span></button></center>
+                        <center><h2><button type="submit" class="btn btn-default">Rechercher</button></h2></center>
                     </form>
                     <br>
                     <iframe src="" name="frame" id="resultat" allowtransparency="true" scrolling="no"></iframe>
@@ -141,25 +112,25 @@
                 <div id="ajouter" class="tab-pane fade">
                     <h1>Nouveau compte</h1>
                     <form action="gestion_util.php" method="post">
-                        <span class="T2">Nom: </span><input type="text" class="form-control" name="nom" />
+                        <h2>Nom: </h2><input type="text" class="form-control" name="nom" />
                         <br>
-                        <span class="T2">Prénom: </span><input type="text" class="form-control" name="prenom" />
+                        <h2>Prénom: </h2><input type="text" class="form-control" name="prenom" />
                         <br>
-                        <span class="T2">Nom d'utilisateur: </span><input type="text" class="form-control" name="login" />
+                        <h2>Nom d'utilisateur: </h2><input type="text" class="form-control" name="login" />
                         <br>
-                        <span class="T2">Mot de passe: </span><input type="password" class="form-control" name="password" />
+                        <h2>Mot de passe: </h2><input type="password" class="form-control" name="password" />
                         <br>
-                        <span class="T2">Répétez le mot de passe: </span><input type="password" class="form-control" name="repeter" value="" />
+                        <h2>Répétez le mot de passe: </h2><input type="password" class="form-control" name="repeter" value="" />
                         <br>
-                        <center><button type="submit" class="btn btn-default"><span class="T2">Valider</span></button></center>
+                        <center><h2><button type="submit" class="btn btn-default">Valider</button></h2></center>
                     </form>
                 </div>
                 
                 <div id="supprimer" class="tab-pane fade">
                     <h1>Supprimer un compte</h1>
                     <form action="gestion_util.php" method="post">
-                        <span class="T2">Login de l'utilisateur: </span><input type="text" class="form-control" name="login" />
-                        <center><button type="submit" class="btn btn-default"><span class="T2">Valider</span></button></center>
+                        <h2>Login de l'utilisateur: </h2><input type="text" class="form-control" name="login" />
+                        <center><h2><button type="submit" class="btn btn-default">Valider</button></h2></center>
                     </form>
                 </div>
                 
@@ -215,7 +186,7 @@
                         </div>
                     </div>
                     
-                    <span class="T2">Écrire un message</span>
+                    <h2>Écrire un message</h2>
                     <form id="envoyer" action="administrateur.php" method="post">
                         <div class="panel panel-default form-group">
                             <div class="panel-heading" style="background-color: #661aff;">
@@ -226,7 +197,7 @@
                                 <label for="texte">Message</label>
                                 <textarea id="texte" name="message" class="form-control" rows="10">Bonjour,</textarea>
                             </div>
-                            <button type="submit" class="btn btn-block btn-default"><span class="T2">Envoyer</span></button>
+                            <h2><button type="submit" class="btn btn-block btn-default">Envoyer</button></h2>
                         </div>
                     </form>
                     <script>

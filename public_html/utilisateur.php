@@ -11,26 +11,15 @@
         
         <link rel="stylesheet" type="text/css" href="css/custom.css">    
         <style type="text/css">
-
-            #menu_compte {
-                background-color: rgba(153, 102, 255, 0.8);
-                display: block;
-                position: fixed;
-                height: 100%;
-                margin-top: 4%;
-            }
-
             .nav-pills {
                 margin-top: 50%;
             }
-
             .nav-pills > li.active > a,
             .nav-pills > li.active > a:focus,
             .nav-pills > li.active > a:hover {
                 background-color: rgb(170, 51, 255);
                 color: #fff;
             }
-
             .nav-pills > li > a { color: #ffccff; }
             .nav-pills > li > a:hover {
                 background-color: rgba(170, 51, 255, 0.5);
@@ -45,22 +34,6 @@
                 border-style: solid;
                 border-width: 5pt;
                 border-color: #ffccff;
-            }
-
-            .T2 {
-                font-size: 15pt;
-                font-family: Arial;
-            }
-
-            h1 {
-                text-align: center;
-            }
-
-            #resultat {
-                border: 1px solid rgb(255, 180, 255);
-                border-radius: 15px;
-                width: 100%;
-                height: 0px;
             }
 
             thead {
@@ -87,8 +60,9 @@
             <div id="menu_compte" class="panel panel-default col-lg-2 col-lg-offset-1">
                 <ul class="panel-body nav nav-pills nav-stacked">
                     <li class="active"><a data-toggle="pill" href="#profil">Profil</a></li>
-                    <li><a data-toggle="pill" href="#achats">Mes derniers achats</a></li>
-                    <li><a data-toggle="pill" href="#ventes">Mes produits en vente</a></li>
+                    <li><a data-toggle="pill" href="#achats">Mes achats</a></li>
+                    <li><a data-toggle="pill" href="#ventes">Mes vente</a></li>
+                    <li><a data-toggle="pill" href="#ajouter">Ajouter un poneys</a></li>
                     <li><a data-toggle="pill" href="#messages">Mes messages</a></li>
                 </ul>
             </div>
@@ -97,23 +71,20 @@
                     <h1>Profil</h1>
                     <p>
                         <img src="user.png" alt="Image de profil" /><br><br>
-                        <span class="T2">Nom: </span>
+                        <h2>Nom: </h2>
                         <?php
                             $user = $_SESSION['users'];
                             echo "$user[nom]";
                         ?>
-                    </p>
                     <p>
-                        <span class="T2">Prénom: </span>
+                        <h2>Prénom: </h2>
                         <?php echo "$user[prenom]"; ?>
-                    </p>
                     <p>
-                        <span class="T2">Nom d'utilisateur: </span>
+                        <h2>Nom d'utilisateur: </h2>
                         <?php echo "$user[login]"; ?>
-                    </p>
                 </div>
                 <div id="achats" class="tab-pane fade">
-                    <h1>Mes achats</h1>
+                    <h1>Mes derniers achats</h1>
                     <table class="table">
                         <thead>
                             <tr>
@@ -144,7 +115,7 @@
                 </div>
                 
                 <div id="ventes" class="tab-pane fade">
-                    <h1>Mes ventes</h1>
+                    <h1>Mes poney en ventes</h1>
                     <table class="table">
                         <thead>
                             <tr>
@@ -170,6 +141,11 @@
                             ?>
                         </tbody>
                     </table>
+                </div>
+                
+                <div id="ajouter" class="tab-pane fade">
+                    <h1>Ajouter un poney en vente</h1>
+                    
                 </div>
                 
                 <div id="messages" class="tab-pane fade">
@@ -220,7 +196,7 @@
                         </div>
                     </div>
                     
-                    <span class="T2">Écrire un message</span>
+                    <h2>Écrire un message</h2>
                     <form id="envoyer" action="administrateur.php" method="post">
                         <div class="panel panel-default form-group">
                             <div class="panel-heading" style="background-color: #661aff;">
@@ -231,7 +207,7 @@
                                 <label for="texte">Message</label>
                                 <textarea id="texte" name="message" class="form-control" rows="10">Bonjour,</textarea>
                             </div>
-                            <button type="submit" class="btn btn-block btn-default"><span class="T2">Envoyer</span></button>
+                            <h2><button type="submit" class="btn btn-block btn-default">Envoyer</button></h2>
                         </div>
                     </form>
                     <script>
