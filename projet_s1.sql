@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Ven 11 Mars 2016 à 18:11
+-- Généré le :  Sam 12 Mars 2016 à 07:47
 -- Version du serveur :  10.1.12-MariaDB
 -- Version de PHP :  7.0.4
 
@@ -23,16 +23,16 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `achats-ventes`
+-- Structure de la table `achats`
 --
 
-CREATE TABLE `achats-ventes` (
+CREATE TABLE `achats` (
   `id` int(11) NOT NULL,
   `type` varchar(50) NOT NULL,
   `nom` varchar(50) NOT NULL,
   `prix` int(10) NOT NULL,
   `proprietaire` varchar(50) NOT NULL,
-  `statut` varchar(50) NOT NULL
+  `ancien_proprietaire` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -77,18 +77,33 @@ CREATE TABLE `utilisateurs` (
 
 INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `login`, `password`) VALUES
 (1, 'Descoings', 'Emeric', 'Quantum', 'password'),
-(3, 'auinrets', 'test', 'loginTest', 'rst'),
+(3, 'auinrets', 'test', 'utilisateur', ''),
 (4, 'auiiiiiiiiiiiiiiiiiiii', 'auie', 'aiaé', 'uie'),
 (5, 'aui', 'test', 'emeric', 'pe');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ventes`
+--
+
+CREATE TABLE `ventes` (
+  `id` int(11) NOT NULL,
+  `type` varchar(50) NOT NULL,
+  `nom` varchar(50) NOT NULL,
+  `prix` int(10) NOT NULL,
+  `proprietaire` varchar(50) NOT NULL,
+  `nouveau_proprietaire` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Index pour les tables exportées
 --
 
 --
--- Index pour la table `achats-ventes`
+-- Index pour la table `achats`
 --
-ALTER TABLE `achats-ventes`
+ALTER TABLE `achats`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -101,6 +116,12 @@ ALTER TABLE `messages`
 -- Index pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `ventes`
+--
+ALTER TABLE `ventes`
   ADD PRIMARY KEY (`id`);
 
 --
