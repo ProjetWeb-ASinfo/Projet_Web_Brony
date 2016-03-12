@@ -71,17 +71,20 @@
                     <h1>Profil</h1>
                     <p>
                         <img src="user.png" alt="Image de profil" /><br><br>
-                        <h2>Nom: </h2>
+                        <span class="h2">Nom: </span>
                         <?php
                             $user = $_SESSION['users'];
                             echo "$user[nom]";
                         ?>
+                    </p>
                     <p>
-                        <h2>Prénom: </h2>
+                        <span class="h2">Prénom: </span>
                         <?php echo "$user[prenom]"; ?>
+                    </p>
                     <p>
-                        <h2>Nom d'utilisateur: </h2>
+                        <span class="h2">Nom d'utilisateur: </span>
                         <?php echo "$user[login]"; ?>
+                    </p>
                 </div>
                 <div id="achats" class="tab-pane fade">
                     <h1>Mes derniers achats</h1>
@@ -189,9 +192,6 @@
                                         msg_frame.style.height = msg_frame.contentDocument.body.scrollHeight +'px';
                                     };
                                 </script>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -207,7 +207,7 @@
                                 <label for="texte">Message</label>
                                 <textarea id="texte" name="message" class="form-control" rows="10">Bonjour,</textarea>
                             </div>
-                            <h2><button type="submit" class="btn btn-block btn-default">Envoyer</button></h2>
+                            <button type="submit" class="btn btn-block btn-default"><span class="h2">Envoyer</span></button>
                         </div>
                     </form>
                     <script>

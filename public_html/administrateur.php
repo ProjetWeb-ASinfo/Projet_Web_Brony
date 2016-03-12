@@ -75,17 +75,20 @@
                     <h1>Profil</h1>
                     <p>
                         <img src="user.png" alt="Image de profil" /><br><br>
-                        <h2>Nom: </h2>
+                        <span class="h2">Nom: </span>
                         <?php
                             $user = $_SESSION['users'];
                             echo "$user[nom]";
                         ?>
+                    </p>
                     <p>
-                        <h2>Prénom: </h2>
+                        <span class="h2">Prénom: </span>
                         <?php echo "$user[prenom]"; ?>
+                    </p>
                     <p>
-                        <h2>Nom d'utilisateur: </h2>
+                        <span class="h2">Nom d'utilisateur: </span>
                         <?php echo "$user[login]"; ?>
+                    </p>
                 </div>
                 
                 <div id="chercher" class="tab-pane fade">
@@ -122,7 +125,7 @@
                         <br>
                         <h2>Répétez le mot de passe: </h2><input type="password" class="form-control" name="repeter" value="" />
                         <br>
-                        <center><h2><button type="submit" class="btn btn-default">Valider</button></h2></center>
+                        <center><button type="submit" class="btn btn-default"><span class="h2">Valider</span></button></center>
                     </form>
                 </div>
                 
@@ -130,7 +133,7 @@
                     <h1>Supprimer un compte</h1>
                     <form action="gestion_util.php" method="post">
                         <h2>Login de l'utilisateur: </h2><input type="text" class="form-control" name="login" />
-                        <center><h2><button type="submit" class="btn btn-default">Valider</button></h2></center>
+                        <center><button type="submit" class="btn btn-default"><span class="h2">Valider</span></button></center>
                     </form>
                 </div>
                 
@@ -197,7 +200,7 @@
                                 <label for="texte">Message</label>
                                 <textarea id="texte" name="message" class="form-control" rows="10">Bonjour,</textarea>
                             </div>
-                            <h2><button type="submit" class="btn btn-block btn-default">Envoyer</button></h2>
+                            <button type="submit" class="btn btn-block btn-default"><span class="h2">Envoyer</span></button>
                         </div>
                     </form>
                     <script>
