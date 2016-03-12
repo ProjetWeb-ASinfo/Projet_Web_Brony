@@ -21,9 +21,8 @@
                 if ($utilisateur = $request->fetch(PDO::FETCH_ASSOC)) {
                     foreach ($utilisateur as $i => $champ) { $_SESSION['users'][$i] = $utilisateur[$i]; }
                 } else
-                    echo '<div class="alert alert-danger" style="margin-top: 4%; text-align: center">
-                            <strong>Erreur!</strong> Mauvais identifiant ou mot de passe.
-                          </div>';
+                    echo '<div class="alert alert-danger" style="margin-top: 4%; text-align: center">'
+                    . '<strong>Erreur!</strong> Mauvais identifiant ou mot de passe.</div>';
             } elseif (isset ($_GET['deco'])) {
                 $_SESSION['users'] = array('id' => '-1',
                                    'nom' => '',
