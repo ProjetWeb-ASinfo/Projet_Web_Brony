@@ -49,7 +49,9 @@
             .form-control {
                  color: #800080;
                  background-color: #ffe6ff;
+                 display: inline;
             }
+            
         </style>
     </head>
     
@@ -62,7 +64,7 @@
                     <li class="active"><a data-toggle="pill" href="#profil">Profil</a></li>
                     <li><a data-toggle="pill" href="#achats">Mes achats</a></li>
                     <li><a data-toggle="pill" href="#ventes">Mes vente</a></li>
-                    <li><a data-toggle="pill" href="#ajouter">Ajouter un poneys</a></li>
+                    <li><a data-toggle="pill" href="#ajouter">Ajouter/supprimer</a></li>
                     <li><a data-toggle="pill" href="#messages">Mes messages</a></li>
                 </ul>
             </div>
@@ -118,7 +120,31 @@
                 </div>
                 
                 <div id="ventes" class="tab-pane fade">
-                    <h1>Mes poney en ventes</h1>
+                    <h1>Mes poneys en ventes</h1>
+                    <div class="modal fade" id="vente_modal">
+                        <div class="modal-dialog">
+                            <div class="modal-content" style="background-color: rgba(77, 0, 77, 0.8);">
+                                <div class="modal-header" style="background-color: #800080;">
+                                    <h1>Vendre ce poney</h1>
+                                </div>
+                                <div class="modal-body" style="background: none;">
+                                    <form action="utilisateur.php" method="post" class="h2">
+                                        <p>
+                                        <div class="col-lg-5">Référence: </div>
+                                        <input type="text" id="id" name="id" class="form-control" readonly style="width: 50%" />
+                                        <p style="margin-top: 5%">
+                                        <span class="col-lg-5">Login de l'acheteur: </span>
+                                        <input type="text" class="form-control" id="nouveau" name="nouveau" style="width: 50%" />
+                                        <p style="margin-top: 5%">
+                                        <span class="col-lg-5">Au prix de: </span>
+                                        <input type="number" class="form-control" id="prix" name="prix" min="0" style="width: 20%" /> €
+                                        <p style="margin-top: 7%">
+                                        <button type="submit" class="btn btn-success btn-block btn-lg"><span class="h2">Valider</span></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <table class="table">
                         <thead>
                             <tr>
@@ -126,29 +152,43 @@
                                 <td>Nom</td>
                                 <td>Vendu à</td>
                                 <td>Prix de vente</td>
+                                <td></td>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                                $vente = "SELECT type, nom, nouveau_proprietaire, prix FROM ventes WHERE proprietaire='$login'";
+                                $vente = "SELECT id, type, nom, nouveau_proprietaire, prix FROM ventes WHERE proprietaire='$login'";
                                 $request2 = $db->prepare($vente);
                                 $request2->execute();
 
                                 while ($ligne = $request2->fetch(PDO::FETCH_ASSOC)) {
-                                    echo '<tr>';
-                                    foreach ($ligne as $i => $cellule) {
-                                        echo "<td>$cellule</td>";
-                                    }
+                                    echo '<tr>'
+                                       . "<td>$ligne[type]</td>"
+                                       . "<td>$ligne[nom]</td>"
+                                       . "<td>$ligne[nouveau_proprietaire]</td>"
+                                       . "<td name=$ligne[id]>$ligne[prix]</td>";
+                                    
+                                    if ($ligne['nouveau_proprietaire']=='')
+                                        echo "<td><button id='$ligne[id]' name='vendre' class='btn btn-block btn-default' data-toggle='modal' data-target='#vente_modal'>Vendre</button></td>";
                                     echo '</tr>';
                                 }
                             ?>
                         </tbody>
                     </table>
+                    <script>
+                        $("button[name='vendre']").click(function() {
+                            var id = $(this).attr("id");
+                            $("#id").val(id);
+                            $("#prix").val($("td[name='"+id+"']").text());
+                        });
+                    </script>
                 </div>
                 
                 <div id="ajouter" class="tab-pane fade">
-                    <h1>Ajouter un poney en vente</h1>
-                    
+                    <h1>Supprimer un poney de la vente</h1>
+                    <form action="utilisateur.php" method="post">
+                        
+                    </form>
                 </div>
                 
                 <div id="messages" class="tab-pane fade">
@@ -159,7 +199,7 @@
                         </thead>
                         <tbody>
                             <?php                                
-                                if ($_SERVER['REQUEST_METHOD']=='POST') {
+                                if ($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['message'])) {
                                     $test = "SELECT id FROM utilisateurs WHERE login=$_POST[destinataire]";
                                     $request1 = $db->prepare($test);
                                     $request1->execute();
