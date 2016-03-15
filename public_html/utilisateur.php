@@ -157,29 +157,44 @@
                         </thead>
                         <tbody>
                             <?php
-                                if ($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['id'])) {
+                                if ($_SERVER['REQUEST_METHOD']=='POST') {
                                     
-                                    $test1 = "SELECT id FROM utilisateurs WHERE login='$_POST[nouveau]'";
-                                    $request1 = $db->prepare($test1);
-                                    $request1->execute();
+                                    if (isset($_POST['nv_nom'])) {
+                                        $ajout = "INSERT INTO ventes (id, type, nom, prix, proprietaire, nouveau_proprietaire)"
+                                                . "VALUES (NULL, '$_POST[nv_type]', '$_POST[nv_nom]', '$_POST[nv_prix]', '$login', '')";
+                                        $request4 = $db->prepare($ajout);
+                                        $request4->execute();
+                                    }
                                     
-                                    $test2 = "SELECT * FROM ventes WHERE id='$_POST[id]'";
-                                    $request2 = $db->prepare($test2);
-                                    $request2->execute();
-                                    $poney = $request2->fetch(PDO::FETCH_ASSOC);
+                                    if (isset($_POST['supprimer'])) {
+                                        $supprimer="DELETE FROM ventes WHERE id=$_POST[supprimer]";
+                                        $request5 = $db->prepare($supprimer);
+                                        $request5->execute();
+                                    }
                                     
-                                    if (($res1=$request1->fetch(PDO::FETCH_ASSOC)) && $poney['proprietaire']==$login) {
-                                        $vente = "UPDATE ventes SET nouveau_proprietaire='$_POST[nouveau]', prix='$_POST[prix]' WHERE id='$_POST[id]'";
-                                        $request1 = $db->prepare($vente);
+                                    if (isset($_POST['id'])) {
+                                        $test1 = "SELECT id FROM utilisateurs WHERE login='$_POST[nouveau]'";
+                                        $request1 = $db->prepare($test1);
                                         $request1->execute();
-                                        
-                                        $achat = "INSERT INTO achats (id, type, nom, prix, proprietaire, ancien_proprietaire) "
-                                                . "VALUES (NULL, '$poney[type]', '$poney[nom]', $_POST[prix], '$_POST[nouveau]', '$login')";
-                                        $request2 = $db->prepare($achat);
+
+                                        $test2 = "SELECT * FROM ventes WHERE id='$_POST[id]'";
+                                        $request2 = $db->prepare($test2);
                                         $request2->execute();
-                                    } else {
-                                        echo "<div class='alert alert-danger' style='margin-top: 4%; text-align: center'>"
-                                        . "<strong>Erreur!</strong> L'utilisateur $_POST[nouveau] n'existe pas ou le poney ne vous appartient pas.</div>";
+                                        $poney = $request2->fetch(PDO::FETCH_ASSOC);
+
+                                        if (($res1=$request1->fetch(PDO::FETCH_ASSOC)) && $poney['proprietaire']==$login) {
+                                            $vente = "UPDATE ventes SET nouveau_proprietaire='$_POST[nouveau]', prix='$_POST[prix]' WHERE id='$_POST[id]'";
+                                            $request1 = $db->prepare($vente);
+                                            $request1->execute();
+
+                                            $achat = "INSERT INTO achats (id, type, nom, prix, proprietaire, ancien_proprietaire) "
+                                                    . "VALUES (NULL, '$poney[type]', '$poney[nom]', $_POST[prix], '$_POST[nouveau]', '$login')";
+                                            $request2 = $db->prepare($achat);
+                                            $request2->execute();
+                                        } else {
+                                            echo "<div class='alert alert-danger' style='margin-top: 4%; text-align: center'>"
+                                            . "<strong>Erreur!</strong> L'utilisateur $_POST[nouveau] n'existe pas ou le poney ne vous appartient pas.</div>";
+                                        }
                                     }
                                 }
                             
@@ -211,9 +226,51 @@
                 </div>
                 
                 <div id="ajouter" class="tab-pane fade">
+                    <h1>Ajouter un poney en vente</h1>
+                    <form action="utilisateur.php" method="post">
+                        <label class="h2">Nom: </label>
+                        <input type="text" name="nv_nom" class="form-control" />
+                        <label class="h2">Type: </label>
+                        <select name="nv_type" class="form-control">
+                            <option>Poney</option>
+                            <option>Licorne</option>
+                            <option>Pégase</option>
+                            <option>Alicorne</option>
+                        </select>
+                        <label class="h2">Prix de vente: </label>
+                        <input type="number" name="nv_prix" min="0" class="form-control" />
+                        <br>
+                        <button type="submit" class="btn btn-block btn-default h2">Valider</button>
+                    </form>
+                    
                     <h1>Supprimer un poney de la vente</h1>
                     <form action="utilisateur.php" method="post">
-                        
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td>Type</td>
+                                    <td>Nom</td>
+                                    <td>Prix de vente</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php                                
+                                    $aff = "SELECT id, type, nom, prix FROM ventes WHERE proprietaire='$login' AND nouveau_proprietaire=''";
+                                    $request6 = $db->prepare($aff);
+                                    $request6->execute();
+
+                                    while ($ligne = $request6->fetch(PDO::FETCH_ASSOC)) {
+                                        echo "<tr>"
+                                           . "<td>$ligne[type]</td>"
+                                           . "<td>$ligne[nom]</td>"
+                                           . "<td>$ligne[prix]</td><td>"
+                                           . "<button type='submit' name='supprimer' class='btn btn-block btn-danger' value='$ligne[id]'>Supprimer</button>"
+                                           . "</td></tr>";
+                                    }
+                                ?>
+                            </tbody>
+                        </table>
                     </form>
                 </div>
                 
