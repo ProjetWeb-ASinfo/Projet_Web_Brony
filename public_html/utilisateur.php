@@ -11,6 +11,7 @@
         
         <link rel="stylesheet" type="text/css" href="css/custom.css">    
         <style type="text/css">
+            
             .nav-pills {
                 margin-top: 50%;
             }
@@ -41,10 +42,13 @@
                 font-size: 15pt;
                 color: rgb(255, 180, 255);
             }
-            tbody {
-                background-color: rgba(235, 92, 235, 0.4);
-                color: rgb(252, 232, 252);
+            tbody { background-color: rgba(235, 92, 235, 0.4); }
+            
+            tbody > tr > td > a, tbody > tr > td > a:focus {
+                color: #fce9fc;
+                text-decoration: none;
             }
+            tbody > tr > td > a:hover { color: #f9d2f9; }
 
             .form-control {
                  color: #800080;
@@ -318,23 +322,23 @@
                                 $request3->execute();
                                 
                                 while ($result = $request3->fetch(PDO::FETCH_ASSOC))
-                                    echo "<tr><td>$result[expediteur]</td><td><a href='message.php?id=$result[id]' target='msg_frame' data-toggle='modal' data-target='#msg_modal'>$result[objet]</a></td>";
+                                    echo "<tr><td>$result[expediteur]</td><td><a href='#' id='$result[id]' name='link_msg' data-toggle='modal' data-target='#msg_modal'>$result[objet]</a></td>";
                             ?>
                         </tbody>
                     </table>
                     <div class="modal fade" id="msg_modal">
                         <div class="modal-dialog modal-lg">
-                            <div class="modal-content" style="background-color: rgb(255, 230, 255);">
-                                <iframe src="" name="msg_frame" allowtransparency="true" style="width: 100%; border: none;"></iframe>
-                                <script>
-                                    msg_frame = document.getElementsByName('msg_frame');
-                                        msg_frame.onload = function(){
-                                        msg_frame.style.height = msg_frame.contentDocument.body.scrollHeight +'px';
-                                    };
-                                </script>
+                            <div id="modal_msg" class="modal-content">
                             </div>
                         </div>
                     </div>
+                    <script>
+                        $("a[name='link_msg']").click(function() {
+                            $.post("message.php", {id: $(this).attr("id")}, function(result) {
+                                $("#modal_msg").html(result);
+                            });
+                        });
+                    </script>
                     
                     <h2>Écrire un message</h2>
                     <form id="envoyer" action="administrateur.php" method="post">
