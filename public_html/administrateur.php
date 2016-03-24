@@ -11,15 +11,6 @@
         
         <link rel="stylesheet" type="text/css" href="css/custom.css">
         <style type="text/css">
-            
-            .body, .modal-open {
-                background-image: url("css/background.png");
-                background-repeat: no-repeat;
-                background-attachment: fixed;
-                background-size: cover;
-                font-family: fantasy;
-            }
-            
             .nav-pills {
                 margin-top: 50%;
             }
@@ -45,11 +36,19 @@
                 border-color: #ffccff;
             }
             
-            table a {
-                text-decoration: none;
-                color: white;
+            thead {
+                background-color: rgba(230, 51, 230, 0.4);
+                font-size: 15pt;
+                color: rgb(255, 180, 255);
             }
-            table a:hover { color: #feeafe; }
+            
+            tbody { background-color: rgba(235, 92, 235, 0.4); }
+            
+            tbody > tr > td > a, tbody > tr > td > a:focus {
+                color: #fce9fc;
+                text-decoration: none;
+            }
+            tbody > tr > td > a:hover { color: #f9d2f9; }
             
             .form-control {
                  color: #800080;
@@ -144,50 +143,22 @@
                             <tr><td>Expéditeur</td><td>Objet</td></tr>
                         </thead>
                         <tbody>
-                            <?php
-                            $login = $_SESSION['users']['login'];
-                                $db = new pdo('mysql:host=localhost;dbname=projet_s1', 'root', 'password');
-                                
-                                if ($_SERVER['REQUEST_METHOD']=='POST') {
-                                    $test = "SELECT id FROM utilisateurs WHERE login=$_POST[destinataire]";
-                                    $request1 = $db->prepare($test);
-                                    $request1->execute();
-                                    if ($resultat = $request1->fetch(PDO::FETCH_ASSOC)) {
-                                        $envoi = "INSERT INTO messages (id, expediteur, destinataire, objet, message, status) "
-                                            ."VALUES (NULL, '$login', '$_POST[destinataire]', '$_POST[objet]', '$_POST[message]', 0)";
-                                        $request2 = $db->prepare($envoi);
-                                        $request2->execute();
-                                    } else {
-                                        echo "<div class='alert alert-danger' style='margin-top: 4%; text-align: center'>"
-                                        . "<strong>Erreur!</strong> L'utilisateur $_POST[destinataire] n'existe pas. Votre message n'a pas put être envoyé</div>";
-                                    }
-                                }
-                                $messages = "SELECT id, expediteur, objet FROM messages WHERE destinataire='$login' AND status=0";
-                                $request = $db->prepare($messages);
-                                $request->execute();
-                                
-                                while ($result = $request->fetch(PDO::FETCH_ASSOC))
-                                    echo "<tr><td>$result[expediteur]</td><td><a href='message.php?id=$result[id]' target='msg_frame' data-toggle='modal' data-target='#msg_modal'>$result[objet]</a></td>";
-                                
-                            ?>
+                            <?php include 'liste_msg.php'; ?>
                         </tbody>
                     </table>
                     <div class="modal fade" id="msg_modal">
                         <div class="modal-dialog modal-lg">
-                            <div class="modal-content" style="background-color: rgb(255, 230, 255);">
-                                <iframe src="" name="msg_frame" allowtransparency="true" style="width: 100%; border: none;"></iframe>
-                                <script>
-                                    msg_frame = document.getElementsByName('msg_frame');
-                                        msg_frame.onload = function(){
-                                        msg_frame.style.height = msg_frame.contentDocument.body.scrollHeight +'px';
-                                    };
-                                </script>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                                </div>
+                            <div id="modal_msg" class="modal-content">
                             </div>
                         </div>
                     </div>
+                    <script>
+                        $("a[name='link_msg']").click(function() {
+                            $.post("message.php", {id: $(this).attr("id")}, function(result) {
+                                $("#modal_msg").html(result);
+                            });
+                        });
+                    </script>
                     
                     <h2>Écrire un message</h2>
                     <form id="envoyer" action="administrateur.php" method="post">
