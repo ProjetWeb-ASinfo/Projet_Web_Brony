@@ -71,22 +71,41 @@
             <div class="col-lg-6 col-lg-offset-4 col-sm-offset-4 tab-content">
                 <div id="profil" class="tab-pane fade in active">
                     <h1>Profil</h1>
-                    <p>
+                    <?php
+                        $login = $_SESSION['users']['login'];
+                        $db = new pdo('mysql:host=localhost;dbname=projet_s1', 'root', 'password');
+                        if ($_SERVER['REQUEST_METHOD']=='POST') {
+                            $update = "UPDATE utilisateurs SET nom='$_POST[nv_nom]', prenom='$_POST[nv_prenom]', login='$_POST[nv_login]' WHERE login='$login'";
+                            $request1 = $db->prepare($update);
+                            $request1->execute();
+                            $login = "SELECT * FROM utilisateurs WHERE login = '$_POST[nv_login]'";
+                            $request2 = $db->prepare($login);
+                            $request2->execute();
+
+                            if ($utilisateur = $request2->fetch(PDO::FETCH_ASSOC)) {
+                                foreach ($utilisateur as $i => $champ) { $_SESSION['users'][$i] = $utilisateur[$i]; }
+                            }
+                        }
+                    ?>
+                    <form method="post" action="utilisateur.php" id="form_prof">
                         <img src="user.png" alt="Image de profil" /><br><br>
-                        <span class="h2">Nom: </span>
-                        <?php
-                            $user = $_SESSION['users'];
-                            echo "$user[nom]";
-                        ?>
-                    </p>
-                    <p>
-                        <span class="h2">Prénom: </span>
-                        <?php echo "$user[prenom]"; ?>
-                    </p>
-                    <p>
-                        <span class="h2">Nom d'utilisateur: </span>
-                        <?php echo "$user[login]"; ?>
-                    </p>
+                        <label for="nom" class="h2">Nom: </label>
+                        <input type="text" id="nom" name="nv_nom" class="form-control" value=<?php $user = $_SESSION['users']; echo "'$user[nom]'"; ?> />
+                        <label for="prenom" class="h2">Prénom: </label>
+                        <input type="text" id="prenom" name="nv_prenom" class="form-control" value=<?php echo "'$user[prenom]'"; ?> />
+                        <label for="login" class="h2">Nom d'utilisateur: </label>
+                        <input type="text" id="login" name="nv_login" class="form-control" value=<?php echo "'$user[login]'"; ?> />
+                        <button type="submit" class="btn btn-success btn-block h2">Modifier</button>
+                        <br>
+                    </form>
+                    <script>
+                        $("#form_prof").submit(function () {
+                            if (($("#nom").valueOf()=="") || ($("#prenom").valueOf()=="") || $("#login").valueOf()=="") {
+                                alert("Aucun champ ne doit être laissé vide!");
+                                return false;
+                            }
+                        });
+                    </script>
                 </div>
                 <div id="achats" class="tab-pane fade">
                     <h1>Mes derniers achats</h1>
@@ -101,8 +120,6 @@
                         </thead>
                         <tbody>
                             <?php
-                            $login = $_SESSION['users']['login'];
-                                $db = new pdo('mysql:host=localhost;dbname=projet_s1', 'root', 'password');
                                 $achats = "SELECT type, nom, ancien_proprietaire, prix FROM achats WHERE proprietaire='$login'";
                                 $request1 = $db->prepare($achats);
                                 $request1->execute();
