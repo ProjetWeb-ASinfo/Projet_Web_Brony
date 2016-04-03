@@ -22,47 +22,78 @@ h2, .h2 {
     background-color: rgba(255, 51, 255,.6);
     margin-top: 5%;
 }
-.menu-button {
-    color : rgb(255, 180, 255);
-    background-color: rgb(235, 21, 235);
-    border-color: rgb(200, 0, 200);
-    font-size: 120%;
+
+#menu1 {
+    color : #7e58da;
+    background-color: #f2f4f6;
+    border-color: #7e58da;
 }
-.nav {
-    width: 100%;
-    padding-left: 12%
+#menu2 {
+    color : #f86c97;
+    background-color: #fff468;
+    border-color: #f86c97;
 }
-.nav > li { width: 12% }
-.btn-default {
-    color : rgb(255, 180, 255);
-    background-color: rgb(235, 92, 235);
-    border-color: rgb(200, 0, 200);
+#menu3 {
+    color : #fe42b4;
+    background-color: #fcc5d7;
+    border-color: #fe42b4;
 }
-.btn-default:hover { border-color: rgb(235, 92, 235); }
-.menu-button:hover, menu-button:focus, .btn-default:hover, .btn-default:focus {
-    color : rgb(235, 21, 235);
-    background-color: rgb(255, 180, 255);
+#menu4 {
+    color : #3a3aa1;
+    background-color: #ba8dbf;
+    border-color: #3a3aa1;
 }
-.dropdown {
-    position: relative;
-    display: inline-block;
+#menu5 {
+    color : #007fc7;
+    background-color: #91d6f9;
+    border-color: #007fc7;
+}
+#menu6 {
+    color : #fef395;
+    background-color: #ffa043;
+    border-color: #fef395;
 }
 .dropdown-content {
     width: 100%;
     display: none;
     position: absolute;
-    background-color: rgba(235, 21, 235, 0.9);
+    background: rgba(240, 51, 240, 0.7);
     z-index: 1;
 }
-.dropdown-content a {
+.dropdown-content>a {
     text-decoration: none;
-    color: rgb(255, 180, 255);
+    color: whitesmoke;
     display: block;
     padding: 10px 10px;
     white-space: nowrap;
 }
-.dropdown-content a:hover { background-color: rgb(204, 0, 204); }
-.dropdown:hover .dropdown-content { display: block; }
+.dropdown-content a:hover { background-color: rgb(240, 51, 240); }
+.dropdown:hover .dropdown-content { display: block }
+#menu5:hover #menu5>.dropdown-content { display: block }
+#nav {
+    width: 100%;
+    padding-left: 10%
+}
+#nav > li { width: 15% }
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+#nav > li > a {
+    border-width: 5px;
+    font-size: 130%
+}  
+
+.btn-default {
+    color : rgb(255, 190, 255);
+    background-color: rgb(235, 92, 235);
+    border-color: rgb(200, 0, 200);
+}
+.btn-default:hover {
+    color : rgb(235, 92, 235);
+    background-color: rgb(255, 190, 255);
+    border-color: rgb(200, 0, 200);
+}
 
 .form-control {
     background-color: rgba(204, 0, 204, 0.4);
