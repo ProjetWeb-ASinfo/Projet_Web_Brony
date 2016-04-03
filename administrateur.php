@@ -36,6 +36,21 @@
                 border-color: #ffccff;
             }
             
+            #resultat > table {
+                border: 1px solid rgb(255, 180, 255);
+                margin-left: auto;
+                margin-right: auto;
+            }
+            #resultat > thead {
+                background-color: rgba(230, 51, 230, 0.4);
+                font-size: 15pt;
+                color: rgb(255, 180, 255);
+            }
+            #resultat > tbody {
+                background-color: rgba(235, 92, 235, 0.4);
+                color: rgb(252, 232, 252);
+            }
+            
             thead {
                 background-color: rgba(230, 51, 230, 0.4);
                 font-size: 15pt;
@@ -92,22 +107,25 @@
                 
                 <div id="chercher" class="tab-pane fade">
                     <h1>Chercher</h1>
-                    <form action="recherche.php" method="get" target="frame" id="recherche">
-                        <h2>Nom: </h2><input type="text" class="form-control" name="nom" />
-                        <br>
-                        <h2>Prénom: </h2><input type="text" class="form-control" name="prenom" />
-                        <br>
-                        <h2>Nom d'utilisateur: </h2><input type="text" class="form-control" name="login" />
-                        <br>
-                        <center><h2><button type="submit" class="btn btn-default">Rechercher</button></h2></center>
-                    </form>
+                    <h2>Nom: </h2><input type="text" class="form-control" id="nom" />
                     <br>
-                    <iframe src="" name="frame" id="resultat" allowtransparency="true" scrolling="no"></iframe>
+                    <h2>Prénom: </h2><input type="text" class="form-control" id="prenom" />
+                    <br>
+                    <h2>Nom d'utilisateur: </h2><input type="text" class="form-control" id="login" />
+                    <br>
+                    <center><button type="button" id="lancer_rech" class="btn btn-default h2">Rechercher</button></center>
+                    <br>
+                    <div id="resultat"></div>
                     <script>
-                        res_frame = document.getElementById('resultat');
-                        res_frame.onload = function (){
-                            res_frame.style.height=res_frame.contentDocument.body.scrollHeight -20 +"px";
-                        };
+                        $("#lancer_rech").click(function() {
+                            $.post("recherche.php", {
+                                nom: $("#nom").val(),
+                                prenom: $("#prenom").val(),
+                                login: $("#login").val()
+                                }, function(result) {
+                                    $("#resultat").html(result);
+                            });
+                        });
                     </script>
                 </div>
                 
@@ -143,7 +161,15 @@
                             <tr><td>Expéditeur</td><td>Objet</td></tr>
                         </thead>
                         <tbody>
-                            <?php include 'liste_msg.php'; ?>
+                        <?php
+                            $login = $_SESSION['users']['login'];
+                            $db = new pdo('mysql:host=localhost;dbname=projet_s1', 'root', 'password');
+                            $messages = "SELECT id, expediteur, objet FROM messages WHERE destinataire='$login' AND status=0";
+                            $request3 = $db->prepare($messages);
+                            $request3->execute();
+                            while ($result = $request3->fetch(PDO::FETCH_ASSOC))
+                            echo "<tr><td>$result[expediteur]</td><td><a href='#' id='$result[id]' name='link_msg' data-toggle='modal' data-target='#msg_modal'>$result[objet]</a></td>";
+                        ?>
                         </tbody>
                     </table>
                     <div class="modal fade" id="msg_modal">
@@ -161,7 +187,7 @@
                     </script>
                     
                     <h2>Écrire un message</h2>
-                    <form id="envoyer" action="administrateur.php" method="post">
+                    <form id="envoyer" action="message.php" method="post">
                         <div class="panel panel-default form-group">
                             <div class="panel-heading" style="background-color: #661aff;">
                                 <input type="text" id="obj" name="objet" value="Objet du message" class="form-control" />

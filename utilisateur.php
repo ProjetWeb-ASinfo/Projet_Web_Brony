@@ -103,7 +103,7 @@
                     </form>
                     <script>
                         $("#form_prof").submit(function () {
-                            if (($("#nom").valueOf()=="") || ($("#prenom").valueOf()=="") || $("#login").valueOf()=="") {
+                            if (($("#nom").val()=="") || ($("#prenom").val()=="") || $("#login").val())=="") {
                                 alert("Aucun champ ne doit être laissé vide!");
                                 return false;
                             }
@@ -301,7 +301,13 @@
                             <tr><td>Expéditeur</td><td>Objet</td></tr>
                         </thead>
                         <tbody>
-                            <?php include 'liste_msg.php'; ?>
+                        <?php
+                            $messages = "SELECT id, expediteur, objet FROM messages WHERE destinataire='$login' AND status=0";
+                            $request3 = $db->prepare($messages);
+                            $request3->execute();
+                            while ($result = $request3->fetch(PDO::FETCH_ASSOC))
+                            echo "<tr><td>$result[expediteur]</td><td><a href='#' id='$result[id]' name='link_msg' data-toggle='modal' data-target='#msg_modal'>$result[objet]</a></td>";
+                        ?>
                         </tbody>
                     </table>
                     <div class="modal fade" id="msg_modal">
@@ -319,7 +325,7 @@
                     </script>
                     
                     <h2>Écrire un message</h2>
-                    <form id="envoyer" action="administrateur.php" method="post">
+                    <form id="envoyer" action="message.php" method="post">
                         <div class="panel panel-default form-group">
                             <div class="panel-heading" style="background-color: #661aff;">
                                 <input type="text" id="obj" name="objet" value="Objet du message" class="form-control" />

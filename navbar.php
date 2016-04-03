@@ -4,7 +4,7 @@
             <ul class="nav navbar-nav">
                 <li>
                     <div class="col-sm-1">
-                        <a class="btn menu-button" href="/projet_S1/public_html">Accueil</a>
+                        <a class="btn menu-button" href="/Projet_Web_Brony">Accueil</a>
                     </div>
                 </li>
                 <li class="dropdown">
