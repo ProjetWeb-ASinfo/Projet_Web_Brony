@@ -50,13 +50,6 @@ CREATE TABLE `messages` (
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Contenu de la table `messages`
---
-
-INSERT INTO `messages` (`id`, `expediteur`, `destinataire`, `objet`, `message`, `status`) VALUES
-(4, 'Quantum', 'Quantum', 'Test de message n°2', 'Bonjour,\r\n\r\nCeci est un test de message avec requêtes SQL.\r\n\r\ncordialement\r\nmoi-même.', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -76,10 +69,8 @@ CREATE TABLE `utilisateurs` (
 --
 
 INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `login`, `password`) VALUES
-(1, 'Descoings', 'Emeric', 'Quantum', 'password'),
-(3, 'auinrets', 'test', 'utilisateur', ''),
-(4, 'auiiiiiiiiiiiiiiiiiiii', 'auie', 'aiaé', 'uie'),
-(5, 'aui', 'test', 'emeric', 'pe');
+(1, '', '', 'Administrateur', 'password'),
+(2, 'Jean-pierre', 'Delaquiche', 'utilisateur', '');
 
 -- --------------------------------------------------------
 

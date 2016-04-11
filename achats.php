@@ -11,7 +11,11 @@
         <link rel="stylesheet" type="text/css" href="css/custom.css">
         <style>
             .criteres {
-                background-color: rgba ();
+                margin-top: 7%;
+                color: whitesmoke;
+                background-color: rgba(255, 51, 255, 0.6);
+                border-radius: 10px;
+                border: rgb(255, 190, 255) solid 1px;
             }
         </style>
     </head>
@@ -20,7 +24,7 @@
         <?php include 'navbar.php'; ?>
         
         <div class="container">
-            <div class="col-lg-6 col-lg-offset-3">
+            <div class="col-lg-6 col-lg-offset-3 criteres">
                 
             </div>
         </div>
