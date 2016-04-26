@@ -80,8 +80,10 @@ h2, .h2 {
     display: inline-block;
 }
 #nav > li > a {
-    border-width: 5px;
-    font-size: 130%
+    border-width: 2px;
+    border-radius: 0px;
+    font-size: 130%;
+    margin-right: 1px;
 }  
 
 .btn-default {
